@@ -149,13 +149,14 @@ class Scenario(BaseScenario):
             dim=1,
         )
 
+        new_agent_positions = torch.randperm(self.n_agents)
         for i, agent in enumerate(self.world.agents):
             agent.set_pos(
                 line_pos
                 + torch.tensor(
                     [
                         -(self.line_length - agent.shape.radius) / 2
-                        + i
+                        + new_agent_positions[i]
                         * (self.line_length - agent.shape.radius)
                         / (self.n_agents - 1),
                         -self.agent_radius * 2,
